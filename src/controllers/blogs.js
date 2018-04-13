@@ -16,6 +16,23 @@ getAll = (req, res, next) => {
   })
 }
 
+getById = (req, res, next) => {
+  console.log("controller working")
+  const id = req.params.id
+  const blogPosts = model.getById(id)
+
+  if (!blogPosts) {
+    return next({
+      status: 404,
+      message: `No blog with id of ${id}`
+    })
+  }
+  res.status(200).json({
+    blogPosts
+  })
+}
+
 module.exports = {
-  getAll
+  getAll,
+  getById
 }

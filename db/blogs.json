@@ -1,1 +1,4 @@
-[{ "id": "first blog", "name": "test blog!!!" }]
+[
+  { "id": "1", "content": "test blog!!!" },
+  { "id": "2", "content": "hello there" }
+]
