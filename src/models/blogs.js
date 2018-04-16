@@ -51,9 +51,36 @@ deletePost = id => {
   return database
 }
 
+update = (id, body) => {
+  console.log("model working")
+  const post = database.find(post => post.id === id)
+
+  let index = database.indexOf(post)
+  let error = []
+  let { content } = body
+
+  let response
+  if (!content || !body.title) {
+    error.push("please add content")
+    response = {
+      error
+    }
+  } else {
+    const newPost = {
+      id: uuid(),
+      title: body.title,
+      content: body.content
+    }
+    database[index] = newPost
+    response = newPost
+  }
+  return response
+}
+
 module.exports = {
   getAll,
   getById,
   create,
-  deletePost
+  deletePost,
+  update
 }

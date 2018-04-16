@@ -1,7 +1,6 @@
 const model = require("../models/blogs.js")
 
 getAll = (req, res, next) => {
-  // console.log("controller working")
   const limit = req.query.limit
   const blogs = model.getAll(limit)
 
@@ -17,7 +16,6 @@ getAll = (req, res, next) => {
 }
 
 getById = (req, res, next) => {
-  // console.log("controller working")
   const id = req.params.id
   const blogPosts = model.getById(id)
 
@@ -33,18 +31,15 @@ getById = (req, res, next) => {
 }
 
 create = (req, res, next) => {
-  // console.log("controller working")
   const newBlog = model.create(req.body.title, req.body.content)
   if (newBlog.error) next(result)
   else
     res.status(200).json({
-      newBlog,
-      message: "created"
+      newBlog
     })
 }
 
 deletePost = (req, res, next) => {
-  // console.log("controller working")
   const blogPosts = model.deletePost(req.params.id)
   if (blogPosts.error) next(blogPosts)
   else {
@@ -54,9 +49,26 @@ deletePost = (req, res, next) => {
   }
 }
 
+update = (req, res, next) => {
+  // console.log("controller working")
+  const post = model.update(req.params.id, req.body)
+  // console.log("are we getting here")
+
+  if (!post) {
+    return next({
+      status: 404,
+      message: `No blog with id ${req.params.id}`
+    })
+  }
+  res.status(200).json({
+    post
+  })
+}
+
 module.exports = {
   getAll,
   getById,
   create,
-  deletePost
+  deletePost,
+  update
 }
