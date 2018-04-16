@@ -1,7 +1,7 @@
 const model = require("../models/blogs")
 
 getAll = (req, res, next) => {
-  console.log("controller working")
+  // console.log("controller working")
   const limit = req.query.limit
   const blogs = model.getAll(limit)
 
@@ -17,7 +17,7 @@ getAll = (req, res, next) => {
 }
 
 getById = (req, res, next) => {
-  console.log("controller working")
+  // console.log("controller working")
   const id = req.params.id
   const blogPosts = model.getById(id)
 
@@ -32,7 +32,23 @@ getById = (req, res, next) => {
   })
 }
 
+create = (req, res, next) => {
+  console.log("controller working")
+  const newBlog = model.create(req.body, (res, err) => {
+    if (err) {
+      return next({
+        status: 404,
+        message: "Please fill out appropriate forms."
+      })
+    }
+    res.status(200).json({
+      newBlog
+    })
+  })
+}
+
 module.exports = {
   getAll,
-  getById
+  getById,
+  create
 }

@@ -13,7 +13,27 @@ getById = id => {
   return blog
 }
 
+create = (title, content) => {
+  console.log("models working")
+  let result
+  if (!title || !content) {
+    result = {
+      status: 404,
+      message: "Fill in all boxes"
+    }
+    return result
+  }
+  let newPost = {
+    id: uuid(),
+    title,
+    content
+  }
+  database.push(newPost)
+  return newPost
+}
+
 module.exports = {
   getAll,
-  getById
+  getById,
+  create
 }
