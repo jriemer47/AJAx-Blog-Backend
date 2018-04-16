@@ -33,8 +33,27 @@ create = (title, content) => {
   return newPost
 }
 
+deletePost = id => {
+  // console.log("models working")
+  let post = database.find(post => post.id === id)
+  if (!post) {
+    result = {
+      status: 404,
+      message: `could not find blog with id of ${id}`
+    }
+    return result
+  }
+  database.forEach((post, index) => {
+    if (post.id === id) {
+      database.splice(index, 1)
+    }
+  })
+  return database
+}
+
 module.exports = {
   getAll,
   getById,
-  create
+  create,
+  deletePost
 }

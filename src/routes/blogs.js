@@ -10,6 +10,6 @@ router.post("/", ctrl.create)
 //
 // router.put("/:id", ctrl.update)
 //
-// router.delete("/:id", ctrl.deleteSnack)
+router.delete("/:id", ctrl.deletePost)
 
 module.exports = router

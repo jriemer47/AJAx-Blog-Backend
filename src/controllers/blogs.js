@@ -33,7 +33,7 @@ getById = (req, res, next) => {
 }
 
 create = (req, res, next) => {
-  console.log("controller working")
+  // console.log("controller working")
   const newBlog = model.create(req.body.title, req.body.content)
   if (newBlog.error) next(result)
   else
@@ -43,8 +43,20 @@ create = (req, res, next) => {
     })
 }
 
+deletePost = (req, res, next) => {
+  // console.log("controller working")
+  const blogPosts = model.deletePost(req.params.id)
+  if (blogPosts.error) next(blogPosts)
+  else {
+    res.status(200).json({
+      blogPosts
+    })
+  }
+}
+
 module.exports = {
   getAll,
   getById,
-  create
+  create,
+  deletePost
 }
