@@ -1,4 +1,4 @@
-const model = require("../models/blogs")
+const model = require("../models/blogs.js")
 
 getAll = (req, res, next) => {
   // console.log("controller working")
@@ -34,17 +34,13 @@ getById = (req, res, next) => {
 
 create = (req, res, next) => {
   console.log("controller working")
-  const newBlog = model.create(req.body, (res, err) => {
-    if (err) {
-      return next({
-        status: 404,
-        message: "Please fill out appropriate forms."
-      })
-    }
+  const newBlog = model.create(req.body.title, req.body.content)
+  if (newBlog.error) next(result)
+  else
     res.status(200).json({
-      newBlog
+      newBlog,
+      message: "created"
     })
-  })
 }
 
 module.exports = {

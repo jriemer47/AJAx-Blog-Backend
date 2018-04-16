@@ -18,7 +18,7 @@ create = (title, content) => {
   let result
   if (!title || !content) {
     result = {
-      status: 404,
+      status: 400,
       message: "Fill in all boxes"
     }
     return result
@@ -28,6 +28,7 @@ create = (title, content) => {
     title,
     content
   }
+  console.log(database)
   database.push(newPost)
   return newPost
 }
