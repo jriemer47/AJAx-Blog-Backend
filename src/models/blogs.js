@@ -67,7 +67,7 @@ update = (id, body) => {
     }
   } else {
     const newPost = {
-      id: uuid(),
+      id,
       title: body.title,
       content: body.content
     }
